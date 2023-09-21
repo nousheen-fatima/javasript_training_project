@@ -1,17 +1,17 @@
 const form = document.getElementById("signup_form");
-const getByID = (id) => document.getElementById(id).value.trim();
+const getValueByID = (id) => document.getElementById(id).value.trim();
 
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const userName = getByID("username");
-  const email = getByID("email");
-  const password = getByID("password");
-  const confirmPassword = getByID("confirm-password");
-  const errors = validateForm(userName, email, password, confirmPassword);
+  let userName = getValueByID("username");
+  let email = getValueByID("email");
+  let password = getValueByID("password");
+  let confirmPassword = getValueByID("confirm_password");
+  let errors = validateForm(userName, email, password, confirmPassword);
   if (Object.keys(errors).length == 0) {
     this.reset();
-    console.log("Form is submitted");
+    window.location.href = "./success.html";
   } else {
     const errorClasses = document.getElementsByClassName("error_message");
     let errorElm = document.getElementById("errors");
@@ -21,32 +21,27 @@ form.addEventListener("submit", function (e) {
       currentClass.textContent = "";
     }
     for (const [key, value] of Object.entries(errors)) {
-      const el = document.getElementById(key);
-      el.textContent = value;
-      el.classList.remove("hide");
-      el.classList.add("show");
-      el.classList.add("red");
+      const element = document.getElementById(key);
+      element.textContent = value;
+      element.classList.remove("hide");
+      element.classList.add("show", "red");
 
       const listItem = document.createElement("li");
       listItem.textContent = value;
       errorElm.appendChild(listItem);
       errorContainer.classList.remove("hide");
-      errorContainer.classList.add("show");
-      errorContainer.classList.add("red");
+      errorContainer.classList.add("show", "red");
     }
   }
 });
 
-function ValidateEmail(email) {
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-    return true;
-  }
-  return false;
+function validateEmail(email) {
+  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 }
 
 function validateForm(username, email, password, confirmPassword) {
   let errors = {};
-  if (!ValidateEmail(email)) errors.invalid_email_error = "Email is not valid";
+  if (!validateEmail(email)) errors.invalid_email_error = "Email is not valid";
   if (username.length < 5)
     errors.username_length_error = "Username should be atleast of 5 characters";
   if (password.length < 8)
@@ -60,10 +55,5 @@ function validateForm(username, email, password, confirmPassword) {
 
 function themeToggle() {
   let element = document.body;
-  const classes = element.classList.contains("dark");
-  if (!classes) {
-    element.classList.add("dark");
-  } else {
-    element.classList.remove("dark");
-  }
+  element.classList.toggle("dark");
 }

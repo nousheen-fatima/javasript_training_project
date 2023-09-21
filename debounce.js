@@ -1,16 +1,15 @@
 const countryElem = document.getElementById("countryInput");
 
 async function getCountriesData(countryName) {
-  const response = await fetch(
-    "https://restcountries.com/v3.1/name/" + countryName
-  );
+  const url = `https://restcountries.com/v3.1/name/${countryName}`;
+  const response = await fetch(url);
 
   const data = await response.json();
   return data;
 }
 
 const showCountryOptions = (countries) => {
-  const countrySelect = document.getElementById("countrySelect");
+  const countrySelect = document.getElementById("country_select");
   // Clear existing options
   while (countrySelect.firstChild) {
     countrySelect.removeChild(countrySelect.firstChild);

@@ -13,19 +13,18 @@
         <div class="form_left">
           <form id="signup_form">
             <div class="input_container">
-              <p class="label" for="username">Username:</label>
-                
+              <label class="label" for="username">Username:</label>
               <input
                 class="input"
                 type="text"
                 id="username"
                 name="username"
-                placeholder="Enter Name"
+                placeholder="Enter username"
               />
             </div>
             <div id="username_length_error" class="hide error_message"></div>
             <div class="input_container">
-              <p class="label" for="email">Email:</label>
+              <label class="label" for="email">Email:</label>
               <input
                 class="input"
                 type="text"
@@ -34,53 +33,53 @@
                 placeholder="Enter your Email"
               />
             </div>
-            <div id="invalid_email_error" class="hide error_message" ></div>
-            
+            <div id="invalid_email_error" class="hide error_message"></div>
+
             <div class="input_container">
-              <p class="label" for="email">Select a Country:</label>
-                <input
+              <label class="label" for="email">Select a Country:</label>
+              <input
                 type="text"
                 class="input"
-
                 id="countryInput"
                 placeholder="Search for a country..."
-                />
-              <select id="countrySelect"></select>
+              />
+              <select id="country_select"></select>
               <div id="results"></div>
             </div>
             <div class="input_container">
-              <p class="label" for="password">Password:</label>
+              <label class="label" for="password">Password:</label>
               <input
                 class="input"
                 type="password"
                 id="password"
                 name="password"
                 placeholder="Enter Password"
-              />              
+              />
             </div>
             <div id="password_length_error" class="hide error_message"></div>
             <div class="input_container">
-              <p class="label" for="confirm-password"
+              <label class="label" for="confirm_password"
                 >Confirm Password:</label
               >
               <input
                 class="input"
                 type="password"
-                id="confirm-password"
-                name="confirm-password"
+                id="confirm_password"
+                name="confirm_password"
                 placeholder="Confirm Your password"
               />
             </div>
             <div id="password_not_match_error" class="hide error_message"></div>
-          <button class="form_button" type="submit">Register</button>
-        </form>
-        
-        <button class="toggleButton" onclick="themeToggle()">Switch mode</button>  
+            <button class="form_button" type="submit">Register</button>
+          </form>
+
+          <button class="toggleButton" onclick="themeToggle()">
+            Switch mode
+          </button>
         </div>
         <div class="form_right">
           <div class="hide" id="error_container">
-            <ul id="errors">
-            </ul>
+            <ul id="errors"></ul>
           </div>
         </div>
       </div>

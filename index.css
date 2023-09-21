@@ -137,9 +137,6 @@ h1 {
 .dark label {
   color: rgba(8, 59, 120, 0.9206276260504201);
 }
-.dark p {
-  color: rgba(8, 59, 120, 0.9206276260504201);
-}
 
 @media only screen and (max-width: 600px) {
   .form {
