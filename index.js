@@ -4,11 +4,20 @@ const getValueByID = (id) => document.getElementById(id).value.trim();
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  let userName = getValueByID("username");
-  let email = getValueByID("email");
-  let password = getValueByID("password");
-  let confirmPassword = getValueByID("confirm_password");
-  let errors = validateForm(userName, email, password, confirmPassword);
+  const userName = getValueByID("username");
+  const email = getValueByID("email");
+  const password = getValueByID("password");
+  const confirmPassword = getValueByID("confirm_password");
+  const country = getValueByID("country");
+
+  let errors = validateForm(
+    userName,
+    email,
+    password,
+    confirmPassword,
+    country
+  );
+
   if (Object.keys(errors).length == 0) {
     this.reset();
     window.location.href = "./success.html";
@@ -39,17 +48,27 @@ function validateEmail(email) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 }
 
-function validateForm(username, email, password, confirmPassword) {
+function validateUserName(username) {
+  return /^([a-zA-Z\d_-]){5,}$/.test(username);
+}
+
+function validatePassword(password) {
+  return /^(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password);
+}
+
+function validateForm(username, email, password, confirmPassword, country) {
   let errors = {};
-  if (!validateEmail(email)) errors.invalid_email_error = "Email is not valid";
-  if (username.length < 5)
-    errors.username_length_error = "Username should be atleast of 5 characters";
-  if (password.length < 8)
-    errors.password_length_error =
-      "Password length should be at least 8 characters";
+  if (!validateEmail(email))
+    errors.invalid_email_error = FORM_ERRORS.EMAIL_ERROR;
+  if (!validateUserName(username))
+    errors.username_length_error = FORM_ERRORS.USERNAME_PASSWORD;
+  if (!validatePassword(password))
+    errors.password_length_error = FORM_ERRORS.PASSWORD_LENGTH_ERROR;
   if (password !== confirmPassword)
-    errors.password_not_match_error =
-      "Passwords do not match. Please try again.";
+    errors.password_not_match_error = FORM_ERRORS.PASSWORD_NOT_MATCH_ERROR;
+  if (!country) {
+    errors.country_error = FORM_ERRORS.COUNTRY_ERROR;
+  }
   return errors;
 }
 

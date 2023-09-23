@@ -1,4 +1,4 @@
-const countryElem = document.getElementById("countryInput");
+const countryElem = document.getElementById("country");
 
 async function getCountriesData(countryName) {
   const url = `https://restcountries.com/v3.1/name/${countryName}`;
@@ -30,8 +30,10 @@ const debounce = (e) => {
     const countryName = e.target.value; // input value
 
     getCountriesData(countryName).then((data) => {
-      let countriesName = data.map((c) => c.name.common);
-      showCountryOptions(countriesName);
+      if (data.status != 404) {
+        let countriesName = data.map((country) => country.name.common);
+        showCountryOptions(countriesName);
+      }
     });
   }, 1000);
 };
